@@ -4,16 +4,16 @@ import '../../../models/response/response_login.dart';
 
 class ServiceShared {
   // set token
-  Future<void> setToken(ResponseLogin token) async {
+  static Future<bool> setToken(ResponseLogin token) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString(
+    return await prefs.setString(
       'token',
       responseLoginToJson(token),
     );
   }
 
   // get token
-  Future<ResponseLogin?> getToken() async {
+  static Future<ResponseLogin?> getToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
     if (token != null) {
@@ -23,7 +23,7 @@ class ServiceShared {
   }
 
   // remove token
-  Future<bool> removeToken() async {
+  static Future<bool> removeToken() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     return await prefs.remove('token');
   }

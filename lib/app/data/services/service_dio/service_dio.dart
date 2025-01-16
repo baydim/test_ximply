@@ -18,7 +18,7 @@ class ServiceDio {
   static Future<BaseOptions> _options() async {
     // var token = await ServiceShared.getToken();
     return BaseOptions(
-      baseUrl: UrlApi.baseUrl ?? '',
+      baseUrl: UrlApi.baseUrl,
       headers: {
         // 'Authorization': 'Bearer ${token?.data?.token}',
       },
@@ -37,9 +37,10 @@ class ServiceDio {
       final dio = Dio(await _options());
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.post(url, data: body);
-
+      print(response.data);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -59,7 +60,8 @@ class ServiceDio {
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.get(url, queryParameters: queries, data: body);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -94,7 +96,8 @@ class ServiceDio {
 
       final response = await dio.post(url, data: formData);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -112,7 +115,8 @@ class ServiceDio {
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.put(url, data: body);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -132,7 +136,8 @@ class ServiceDio {
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.patch(url, data: body);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -150,7 +155,8 @@ class ServiceDio {
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.delete(url);
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
@@ -209,38 +215,13 @@ class ServiceDio {
         ),
       );
       result = ResponseDefault.fromJson(
-        jsonDecode(response.data),
+        // jsonDecode(response.data),
+        response.data,
       );
     } on DioException catch (e) {
       result = funcDioExceptionHandler(e);
     }
     return result;
-  }
-
-  static Future sendNotif(
-      {required String header, required String content}) async {
-    final dio = Dio(
-      BaseOptions(
-        baseUrl: "https://onesignal.com/api/v1/",
-        headers: {
-          'Authorization':
-              'Basic MWNiZjUzMmItMDZmZC00NGY3LWExNzItNmI0M2E1YTFmNjQw',
-        },
-        connectTimeout: const Duration(seconds: 15),
-        receiveTimeout: const Duration(seconds: 15),
-      ),
-    );
-
-    await dio.post("notifications", data: {
-      "app_id": "36a0dd6e-b4fb-4c0c-90fa-4c0b4c6844e9",
-      "included_segments": ["Total Subscriptions"],
-      "headings": {
-        "en": header,
-      },
-      "contents": {
-        "en": content,
-      }
-    });
   }
 }
 

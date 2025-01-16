@@ -1,23 +1,22 @@
 import 'package:get/get.dart';
+import 'package:test_ximply/app/data/services/service_shared/service_shared.dart';
+import 'package:test_ximply/app/routes/app_pages.dart';
 
 class SplashController extends GetxController {
-  //TODO: Implement SplashController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  // cek session
+  Future<void> cekSession() async {
+    await Future.delayed(Duration(seconds: 2));
+    var data = await ServiceShared.getToken();
+    if (data != null) {
+      Get.offAllNamed(Routes.HOME);
+    } else {
+      Get.offAllNamed(Routes.LOGIN);
+    }
   }
 
   @override
   void onReady() {
+    cekSession();
     super.onReady();
   }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

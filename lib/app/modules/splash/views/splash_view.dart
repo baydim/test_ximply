@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:test_ximply/app/themes/app_theme.dart';
 
 import '../controllers/splash_controller.dart';
 
@@ -9,14 +10,12 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('SplashView'),
-        centerTitle: true,
-      ),
-      body: const Center(
+      body: Center(
         child: Text(
-          'SplashView is working',
-          style: TextStyle(fontSize: 20),
+          "TEST XIMPLY",
+          style: context.txtStyl.bodyLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
