@@ -119,6 +119,7 @@ class _CardProductState extends State<CardProduct> {
                 onTap: () {
                   Get.to(
                     () => DetailProductView(id: widget.product.id ?? ""),
+                    preventDuplicates: false,
                   );
                 },
               ),

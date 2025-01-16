@@ -5,6 +5,9 @@ import 'package:test_ximply/app/models/response/response_detail_product.dart';
 import 'package:test_ximply/app/themes/app_theme.dart';
 import 'package:test_ximply/app/util/text_formatter.dart';
 import 'package:test_ximply/app/widget/app_loading.dart';
+import 'package:test_ximply/app/widget/app_snackbar.dart';
+import '../../../models/response/response_product.dart' hide Shipper, Image;
+import '../../../widget/card_product.dart';
 import '../controllers/detail_product_controller.dart';
 
 class DetailProductView extends StatefulWidget {
@@ -298,6 +301,30 @@ class _DetailProductViewState extends State<DetailProductView> {
                             ),
                           ),
                         SizedBox(
+                          height: kToolbarHeight,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Text(
+                            "Produk Rekomendasi",
+                            style: context.txtStyl.titleMedium,
+                          ),
+                        ),
+                        GridView.count(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 2,
+                          childAspectRatio: 3 / 5,
+                          children: [
+                            for (var i in controller
+                                    .dataProductList.value.data?.data ??
+                                <Product>[])
+                              CardProduct(
+                                product: i,
+                              ),
+                          ],
+                        ),
+                        SizedBox(
                           height: kToolbarHeight * 2,
                         ),
                       ],
@@ -308,16 +335,66 @@ class _DetailProductViewState extends State<DetailProductView> {
               : Padding(
                   padding:
                       const EdgeInsets.only(left: 15, right: 15, bottom: 15),
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: context.clrStyl.primary,
-                      foregroundColor: context.clrStyl.onPrimary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            /// icon button counter min -, 1, icon button counter +
+                            IconButton(
+                              onPressed: () {
+                                if (controller.count.value > 1) {
+                                  controller.count.value--;
+                                }
+                              },
+                              icon: Icon(Icons.remove),
+                            ),
+
+                            /// text counter
+                            Text(controller.count.value.toString()),
+
+                            /// icon button counter +
+                            IconButton(
+                              onPressed: () {
+                                final stock =
+                                    controller.dataProduct.value.data?.stock ??
+                                        0;
+                                if (controller.count.value < stock) {
+                                  controller.count.value++;
+                                } else {
+                                  appSnackbar(
+                                    message: "Stock tidak mencukupi",
+                                    isError: true,
+                                  );
+                                }
+                              },
+                              icon: Icon(Icons.add),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: Text("Check Out Now"),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: context.clrStyl.primary,
+                          foregroundColor: context.clrStyl.onPrimary,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Center(
+                            child: Text("Check Out Now"),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
         );

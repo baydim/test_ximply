@@ -6,4 +6,6 @@ class UrlApi {
 
   static String categories = "categories";
   static String products = "products";
+
+  static String me = "auth/me";
 }
