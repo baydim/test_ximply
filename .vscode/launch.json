@@ -1,0 +1,35 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "test_ximply",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "fvm", "flutter", "run", "--debug"
+            ]
+        },
+        {
+            "name": "test_ximply (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "args": [
+                "fvm", "flutter", "run", "--profile"
+            ]
+        },
+        {
+            "name": "test_ximply (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "args": [
+                "fvm", "flutter", "run", "--release"
+            ]
+        }
+    ]
+}
