@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:test_ximply/app/data/repositories/repos_auth.dart';
 import 'package:test_ximply/app/models/response/response_category.dart';
@@ -30,9 +31,13 @@ class HomeController extends GetxController {
   funcGetMe() async {
     var res = await ReposAuth.me();
     if (res.status == true) {
-      print(res.data?.name);
+      if (kDebugMode) {
+        print(res.data?.name);
+      }
     } else {
-      print(res.message);
+      if (kDebugMode) {
+        print(res.message);
+      }
     }
   }
 

@@ -22,8 +22,7 @@ class ReposAuth {
           res,
         ),
       );
-    } catch (e, stack) {
-      print(stack);
+    } catch (e) {
       return ResponseLogin(
         status: false,
         message: e.toString(),
@@ -45,8 +44,7 @@ class ReposAuth {
           res,
         ),
       );
-    } catch (e, stack) {
-      print(stack);
+    } catch (e) {
       return ResponseAuthRegis(
         status: false,
         message: e.toString(),
@@ -65,8 +63,7 @@ class ReposAuth {
           res,
         ),
       );
-    } catch (e, stack) {
-      print(stack);
+    } catch (e) {
       return ResponseAuthMe(
         status: false,
         message: e.toString(),

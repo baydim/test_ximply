@@ -36,7 +36,7 @@ class ServiceDio {
       final dio = Dio(await _options());
       dio.interceptors.add(_defaultInterceptor);
       final response = await dio.post(url, data: body);
-      print(response.data);
+
       result = ResponseDefault.fromJson(
         // jsonDecode(response.data),
         response.data,

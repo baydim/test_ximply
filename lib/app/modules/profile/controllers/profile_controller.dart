@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:test_ximply/app/data/services/service_shared/service_shared.dart';
@@ -14,9 +15,13 @@ class ProfileController extends GetxController {
     isLoad(true);
     dataMe.value = await ReposAuth.me();
     if (dataMe.value.status == true) {
-      print(dataMe.value.data?.name);
+      if (kDebugMode) {
+        print(dataMe.value.data?.name);
+      }
     } else {
-      print(dataMe.value.message);
+      if (kDebugMode) {
+        print(dataMe.value.message);
+      }
     }
     isLoad(false);
   }
