@@ -1,23 +1,14 @@
 import 'package:get/get.dart';
+import 'package:test_ximply/app/data/repositories/repos_product.dart';
+import '../../../models/response/response_detail_product.dart';
 
 class DetailProductController extends GetxController {
-  //TODO: Implement DetailProductController
-
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+  var idProduct = "".obs;
+  var isLoadProduct = true.obs;
+  var dataProduct = ResponseDetailProduct().obs;
+  funcGetProdcuct() async {
+    isLoadProduct.value = true;
+    dataProduct.value = await ReposProduct.getDetailProduct(idProduct.value);
+    isLoadProduct.value = false;
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
-
-  void increment() => count.value++;
 }

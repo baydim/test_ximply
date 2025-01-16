@@ -36,11 +36,11 @@ class AppPages {
       page: () => const RegisterView(),
       binding: RegisterBinding(),
     ),
-    GetPage(
-      name: _Paths.DETAIL_PRODUCT,
-      page: () => const DetailProductView(),
-      binding: DetailProductBinding(),
-    ),
+    // GetPage(
+    //   name: _Paths.DETAIL_PRODUCT,
+    //   page: () => const DetailProductView(),
+    //   binding: DetailProductBinding(),
+    // ),
     GetPage(
       name: _Paths.SPLASH,
       page: () => const SplashView(),

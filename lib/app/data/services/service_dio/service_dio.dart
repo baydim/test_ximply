@@ -1,12 +1,11 @@
 // ignore_for_file: non_constant_identifier_names, unnecessary_null_comparison
-
-import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 
 import 'package:mime_type/mime_type.dart';
+import '../service_shared/service_shared.dart';
 import 'api_interceptor.dart';
 import 'dio_error_handler.dart';
 import 'response_default.dart';
@@ -16,11 +15,11 @@ class ServiceDio {
   static final _defaultInterceptor = ApiInterceptor();
 
   static Future<BaseOptions> _options() async {
-    // var token = await ServiceShared.getToken();
+    var token = await ServiceShared.getToken();
     return BaseOptions(
       baseUrl: UrlApi.baseUrl,
       headers: {
-        // 'Authorization': 'Bearer ${token?.data?.token}',
+        'Authorization': 'Bearer ${token?.data?.accessToken}',
       },
       contentType: 'application/json',
       connectTimeout: const Duration(seconds: 15),
