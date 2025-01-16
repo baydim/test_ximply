@@ -11,26 +11,30 @@ List<Map<String, dynamic>> responseDefaultListToJson(
     data.map((x) => x.toJson()).toList();
 
 class ResponseDefault {
-  bool responseResult = false;
+  bool status = false;
   String? message = "Terjadi Kesalahan";
+  dynamic errors;
   dynamic data;
 
   ResponseDefault({
-    this.responseResult = false,
+    this.status = false,
     this.message = "Terjadi Kesalahan",
+    this.errors,
     this.data,
   });
 
   ResponseDefault.fromJson(Map<String, dynamic> json) {
-    responseResult = json['status'];
+    status = json['status'];
     message = json['message'];
+    errors = json['errors'];
     data = json['data'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['status'] = responseResult;
+    data['status'] = status;
     data['message'] = message;
+    data['errors'] = errors;
     data['data'] = this.data;
     return data;
   }
